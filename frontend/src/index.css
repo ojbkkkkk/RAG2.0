@@ -1,0 +1,710 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══ Dark theme (default) ═══ */
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #0c1929;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --surface-active: rgba(255, 255, 255, 0.1);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.2);
+  --accent: #6366f1;
+  --accent-light: #818cf8;
+  --accent-secondary: #06b6d4;
+  --sidebar-bg: rgba(255, 255, 255, 0.05);
+  --sidebar-active-from: rgba(99, 102, 241, 0.2);
+  --sidebar-active-to: rgba(6, 182, 212, 0.2);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-border: rgba(255, 255, 255, 0.1);
+  --input-focus-border: #6366f1;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.3);
+  --selection-bg: rgba(99, 102, 241, 0.3);
+  --modal-bg: rgba(30, 41, 59, 0.9);
+  --modal-border: rgba(255, 255, 255, 0.1);
+  --code-bg: rgba(255, 255, 255, 0.08);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --welcome-bg: #050a0f;
+  --welcome-glow: #00ffd5;
+  --welcome-seal: #00e5ff;
+  --welcome-pulse: rgba(0, 229, 255, 0.3);
+}
+
+/* ═══ Light theme ═══ */
+html.light {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #eef2f7;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --surface: #ffffff;
+  --surface-hover: #f1f5f9;
+  --surface-active: #e2e8f0;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --accent: #4f46e5;
+  --accent-light: #6366f1;
+  --accent-secondary: #0891b2;
+  --sidebar-bg: #ffffff;
+  --sidebar-active-from: rgba(79, 70, 229, 0.1);
+  --sidebar-active-to: rgba(8, 145, 178, 0.1);
+  --input-bg: #ffffff;
+  --input-border: #e2e8f0;
+  --input-focus-border: #4f46e5;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.15);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.25);
+  --selection-bg: rgba(79, 70, 229, 0.2);
+  --modal-bg: #ffffff;
+  --modal-border: #e2e8f0;
+  --code-bg: #f1f5f9;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --welcome-bg: #f0f4f8;
+  --welcome-glow: #0077aa;
+  --welcome-seal: #005580;
+  --welcome-pulse: rgba(0, 85, 128, 0.2);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Global selection highlight */
+::selection {
+  background: var(--selection-bg);
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Page fade-in animation */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-in {
+  animation: page-fade-in 0.3s ease-out forwards;
+}
+
+/* Toast slide-in animation */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 0.3s ease-out forwards;
+}
+
+/* Stagger list animation */
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-stagger {
+  animation: stagger-in 0.35s ease-out forwards;
+  opacity: 0;
+}
+
+/* Sidebar transition */
+.sidebar-transition {
+  transition: width 0.2s ease, padding 0.2s ease;
+}
+
+/* Button hover scale */
+.btn-hover-scale {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.btn-hover-scale:active {
+  transform: scale(0.98);
+}
+
+/* Upload step progress animation */
+@keyframes step-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-step-pulse {
+  animation: step-pulse 1.2s ease-in-out infinite;
+}
+
+/* ═══ Dashboard pipeline animations ═══ */
+
+/* Dashed line flowing effect */
+@keyframes dash-flow {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -28; }
+}
+
+.animate-dash-flow {
+  animation: dash-flow 1.5s linear infinite;
+}
+
+/* Particle 1: fast */
+@keyframes particle-move-1 {
+  0% { transform: translateX(0); opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { transform: translateX(calc(100vw * 0.8)); opacity: 0; }
+}
+
+/* Particle 2: medium */
+@keyframes particle-move-2 {
+  0% { transform: translateX(0); opacity: 0; }
+  5% { opacity: 0.8; }
+  95% { opacity: 0.8; }
+  100% { transform: translateX(calc(100vw * 0.8)); opacity: 0; }
+}
+
+/* Particle 3: slow */
+@keyframes particle-move-3 {
+  0% { transform: translateX(0); opacity: 0; }
+  5% { opacity: 0.6; }
+  95% { opacity: 0.6; }
+  100% { transform: translateX(calc(100vw * 0.8)); opacity: 0; }
+}
+
+.animate-particle-1 {
+  animation: particle-move-1 3s linear infinite;
+  cy: 4;
+  cx: 10%;
+}
+
+.animate-particle-2 {
+  animation: particle-move-2 4.5s linear infinite;
+  animation-delay: 1.5s;
+  cy: 4;
+  cx: 10%;
+}
+
+.animate-particle-3 {
+  animation: particle-move-3 6s linear infinite;
+  animation-delay: 3s;
+  cy: 4;
+  cx: 10%;
+}
+
+/* Slow ping for pipeline nodes */
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.6; }
+  70% { transform: scale(1.3); opacity: 0; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+.animate-ping-slow {
+  animation: ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ═══ Dashboard enhanced animations ═══ */
+
+/* 卡片入场动画 - 从下方滑入 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+/* 条形图填充动画 */
+@keyframes barFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--bar-width, 0%);
+  }
+}
+
+.animate-barFill {
+  animation: barFill 1.2s ease-out forwards;
+  animation-delay: var(--bar-delay, 0s);
+}
+
+/* 分支管道粒子流动 - 上分支（向量化路径） */
+@keyframes branch-flow-upper {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* 分支管道粒子流动 - 下分支（图谱路径） */
+@keyframes branch-flow-lower {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* 节点呼吸发光 */
+@keyframes breatheGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6), 0 0 40px rgba(99, 102, 241, 0.2);
+  }
+}
+
+.animate-breathe {
+  animation: breatheGlow 3s ease-in-out infinite;
+}
+
+/* 卡片hover缩放 */
+.card-hover-scale {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-scale:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+}
+
+/* 数字跳动辅助 - 文字微抖动 */
+@keyframes numberPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.animate-numberPop {
+  animation: numberPop 0.3s ease-out;
+}
+
+/* 浅色主题下的hover阴影适配 */
+html.light .card-hover-scale:hover {
+  box-shadow: 0 8px 32px rgba(79, 70, 229, 0.15);
+}
+
+/* ═══ Theme utility classes ═══ */
+
+.theme-surface {
+  background: var(--surface);
+}
+
+.theme-surface-hover:hover {
+  background: var(--surface-hover);
+}
+
+.theme-surface-active:hover {
+  background: var(--surface-active);
+}
+
+.theme-border {
+  border-color: var(--border);
+}
+
+.theme-border-hover:hover {
+  border-color: var(--border-hover);
+}
+
+.theme-text {
+  color: var(--text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--text-secondary);
+}
+
+.theme-text-muted {
+  color: var(--text-muted);
+}
+
+.theme-input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+.theme-input:focus {
+  border-color: var(--input-focus-border);
+  outline: none;
+}
+
+.theme-sidebar {
+  background: var(--sidebar-bg);
+  border-color: var(--border);
+}
+
+.theme-modal {
+  background: var(--modal-bg);
+  border-color: var(--modal-border);
+}
+
+/* ═══ Light theme global overrides for Tailwind utility classes ═══ */
+/* This avoids modifying every single component file */
+
+html.light .bg-white\/5 {
+  background: var(--surface) !important;
+}
+
+html.light .bg-white\/10 {
+  background: var(--surface-hover) !important;
+}
+
+html.light .border-white\/10 {
+  border-color: var(--border) !important;
+}
+
+html.light .border-white\/5 {
+  border-color: var(--border) !important;
+}
+
+html.light .border-white\/20 {
+  border-color: var(--border-hover) !important;
+}
+
+html.light .bg-slate-800\/80 {
+  background: var(--surface) !important;
+}
+
+html.light .bg-slate-800\/90 {
+  background: var(--modal-bg) !important;
+}
+
+html.light .bg-slate-800\/95 {
+  background: var(--modal-bg) !important;
+}
+
+html.light .bg-slate-900\/80 {
+  background: var(--surface) !important;
+}
+
+html.light .bg-gray-900\/90 {
+  background: var(--surface) !important;
+}
+
+html.light .border-slate-700 {
+  border-color: var(--border) !important;
+}
+
+html.light .text-slate-200 {
+  color: var(--text-primary) !important;
+}
+
+html.light .text-slate-300 {
+  color: var(--text-secondary) !important;
+}
+
+html.light .text-slate-400 {
+  color: var(--text-secondary) !important;
+}
+
+html.light .text-white {
+  color: var(--text-primary) !important;
+}
+
+html.light .text-gray-300 {
+  color: var(--text-secondary) !important;
+}
+
+html.light .text-gray-400 {
+  color: var(--text-muted) !important;
+}
+
+html.light .text-gray-500 {
+  color: var(--text-muted) !important;
+}
+
+html.light .text-gray-600 {
+  color: var(--text-muted) !important;
+}
+
+html.light .placeholder-gray-500::placeholder {
+  color: var(--text-muted) !important;
+}
+
+html.light .hover\:bg-white\/10:hover {
+  background: var(--surface-hover) !important;
+}
+
+html.light .hover\:bg-white\/20:hover {
+  background: var(--surface-active) !important;
+}
+
+html.light .hover\:text-white:hover {
+  color: var(--text-primary) !important;
+}
+
+html.light .hover\:border-white\/20:hover {
+  border-color: var(--border-hover) !important;
+}
+
+html.light .hover\:border-white\/40:hover {
+  border-color: var(--border-hover) !important;
+}
+
+/* Input styles in light mode */
+html.light .bg-white\/5.border-white\/10.rounded-lg.text-sm.text-white {
+  color: var(--text-primary) !important;
+}
+
+/* React Flow dark theme overrides - dark mode only */
+.react-flow__controls button {
+  background: rgba(30, 41, 59, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #94a3b8 !important;
+}
+.react-flow__controls button:hover {
+  background: rgba(51, 65, 85, 0.9) !important;
+  color: #e2e8f0 !important;
+}
+.react-flow__controls button svg {
+  fill: currentColor !important;
+}
+.react-flow__minimap {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+}
+
+/* React Flow light theme overrides */
+html.light .react-flow__controls button {
+  background: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #64748b !important;
+}
+html.light .react-flow__controls button:hover {
+  background: #f1f5f9 !important;
+  color: #1e293b !important;
+}
+html.light .react-flow__minimap {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+}
+html.light .react-flow__attribution {
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+html.light .react-flow__background {
+  opacity: 0.3;
+}
+
+/* Entity node ring offset in light mode */
+html.light .ring-offset-2 {
+  --tw-ring-offset-color: #ffffff;
+}
+
+/* Select option styling for light mode */
+html.light select option {
+  background: #ffffff;
+  color: #1e293b;
+}
+
+/* ═══ Light theme overrides for Dashboard & additional components ═══ */
+
+/* 深灰色背景类在浅色主题下的覆盖 */
+html.light .bg-gray-900 {
+  background-color: var(--surface) !important;
+}
+html.light .bg-gray-800 {
+  background-color: var(--surface) !important;
+}
+html.light .bg-gray-700 {
+  background-color: var(--surface-hover) !important;
+}
+
+/* 透明白文本在浅色主题的覆盖 */
+html.light .text-white\/80 {
+  color: var(--text-primary) !important;
+}
+html.light .text-white\/70 {
+  color: var(--text-secondary) !important;
+}
+html.light .text-white\/60 {
+  color: var(--text-secondary) !important;
+}
+
+/* 缺失的 text-gray-200 覆盖 */
+html.light .text-gray-200 {
+  color: var(--text-primary) !important;
+}
+
+/* 透明白色背景的更多变体 */
+html.light .bg-white\/20 {
+  background-color: rgba(0, 0, 0, 0.08) !important;
+}
+html.light .bg-white\/30 {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* SVG fill 类覆盖 */
+html.light .fill-white {
+  fill: var(--text-primary) !important;
+}
+html.light .fill-gray-400 {
+  fill: var(--text-secondary) !important;
+}
+
+/* 深色边框覆盖 */
+html.light .border-gray-800 {
+  border-color: var(--border) !important;
+}
+html.light .border-gray-700 {
+  border-color: var(--border) !important;
+}
+html.light .border-indigo-500\/50 {
+  border-color: rgba(79, 70, 229, 0.3) !important;
+}
+
+/* hover 状态补充 */
+html.light .hover\:bg-gray-800:hover {
+  background-color: var(--surface-hover) !important;
+}
+html.light .hover\:bg-gray-700:hover {
+  background-color: var(--surface-hover) !important;
+}
+
+/* ═══ Gradient card / button text-white exemption ═══ */
+/* 渐变背景卡片和按钮内的白色文字在浅色主题下应保持白色（因为渐变背景是深色的） */
+html.light .gradient-card .text-white,
+html.light .gradient-card.text-white {
+  color: #ffffff !important;
+}
+
+html.light .gradient-card .text-white\/80,
+html.light .gradient-card .text-white\/70,
+html.light .gradient-card .text-white\/60 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+html.light [class*="from-indigo"] .text-white,
+html.light [class*="from-indigo"].text-white,
+html.light [class*="from-violet"] .text-white,
+html.light [class*="from-violet"].text-white,
+html.light [class*="from-purple"] .text-white,
+html.light [class*="from-purple"].text-white,
+html.light [class*="from-fuchsia"] .text-white,
+html.light [class*="from-fuchsia"].text-white,
+html.light [class*="from-pink"] .text-white,
+html.light [class*="from-pink"].text-white,
+html.light [class*="from-rose"] .text-white,
+html.light [class*="from-rose"].text-white,
+html.light [class*="bg-gradient"] .text-white,
+html.light [class*="bg-gradient"].text-white {
+  color: #ffffff !important;
+}
+
+html.light [class*="from-indigo"] .text-white\/80,
+html.light [class*="from-indigo"] .text-white\/70,
+html.light [class*="from-indigo"] .text-white\/60,
+html.light [class*="from-violet"] .text-white\/80,
+html.light [class*="from-violet"] .text-white\/70,
+html.light [class*="from-violet"] .text-white\/60,
+html.light [class*="from-purple"] .text-white\/80,
+html.light [class*="from-purple"] .text-white\/70,
+html.light [class*="from-purple"] .text-white\/60,
+html.light [class*="from-fuchsia"] .text-white\/80,
+html.light [class*="from-fuchsia"] .text-white\/70,
+html.light [class*="from-fuchsia"] .text-white\/60,
+html.light [class*="from-pink"] .text-white\/80,
+html.light [class*="from-pink"] .text-white\/70,
+html.light [class*="from-pink"] .text-white\/60,
+html.light [class*="from-rose"] .text-white\/80,
+html.light [class*="from-rose"] .text-white\/70,
+html.light [class*="from-rose"] .text-white\/60,
+html.light [class*="bg-gradient"] .text-white\/80,
+html.light [class*="bg-gradient"] .text-white\/70,
+html.light [class*="bg-gradient"] .text-white\/60 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+html.light .gradient-card .bg-white\/20,
+html.light .gradient-card .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* ═══ Welcome page animations ═══ */
+
+@keyframes welcome-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+@keyframes welcome-fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes welcome-glow {
+  0%, 100% { filter: drop-shadow(0 0 8px var(--welcome-glow)); }
+  50% { filter: drop-shadow(0 0 20px var(--welcome-glow)); }
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>矩阵-知识库管理系统</title>
+    <script>
+      // 在 React 加载前立即应用主题，防止闪烁
+      try {
+        var theme = localStorage.getItem('rag-theme');
+        if (theme === 'light') document.documentElement.classList.add('light');
+      } catch(e) {}
+    </script>
+  </head>
+  <body class="antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
